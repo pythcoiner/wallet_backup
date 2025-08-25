@@ -34,7 +34,7 @@ JSON object representing the backup structure. This object includes wallet-level
 metadata, multiple accounts, and associated key data.
 
 ### Wallet Backup Structure
-
+- `created_at`: Optional timestamp indicating the backup creation time
 - `version`: Optionnal version of the backup format
 - `name`: Optional wallet name
 - `description`: Optional wallet description
