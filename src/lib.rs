@@ -7,7 +7,11 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Backup {
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub version: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     pub accounts: Vec<Account>,
     pub network: Network,
     /// App proprietary metadata (settings, configuration, etc..)
@@ -18,9 +22,9 @@ pub struct Backup {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Account {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub version: Option<u32>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     pub descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>,
     pub active: bool,
     pub receive_index: Option<u64>,
@@ -44,8 +48,8 @@ pub struct Account {
 impl Account {
     pub fn new(descriptor: miniscript::Descriptor<miniscript::DescriptorPublicKey>) -> Self {
         Self {
-            version: None,
             name: None,
+            description: None,
             descriptor,
             active: true,
             receive_index: None,
